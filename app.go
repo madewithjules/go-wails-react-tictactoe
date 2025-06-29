@@ -50,15 +50,15 @@ func (a *App) NewGame() *GameState {
 // MakeMove handles a player's move
 func (a *App) MakeMove(index int) (*GameState, error) {
 	if a.gameState.GameOver {
-		return nil, fmt.Errorf("Game is over")
+		return nil, fmt.Errorf("game is over")
 	}
 
 	if index < 0 || index >= 9 {
-		return nil, fmt.Errorf("Invalid move index")
+		return nil, fmt.Errorf("invalid move index")
 	}
 
 	if a.gameState.Board[index] != "" {
-		return nil, fmt.Errorf("Cell already occupied")
+		return nil, fmt.Errorf("cell already occupied")
 	}
 
 	a.gameState.Board[index] = a.gameState.CurrentPlayer

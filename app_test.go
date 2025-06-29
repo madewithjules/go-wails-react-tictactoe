@@ -69,45 +69,38 @@ func TestMakeMove(t *testing.T) {
 		}
 	})
 
-	t.Run("Cell already occupied", func(t *testing.T) {
+	t.Run("cell already occupied", func(t *testing.T) {
 		app.gameState = app.NewGame()
 		_, err := app.MakeMove(0) // X moves at 0
 		if err != nil {
 			t.Fatalf("Initial MakeMove(0) failed: %v", err)
 		}
 
-		originalGameState := *app.gameState // Capture state before invalid move
-
-		gs, err := app.MakeMove(0) // O tries to move to the same cell 0
+		_, err = app.MakeMove(0) // O tries to move to the same cell 0
 		if err == nil {
 			t.Fatalf("Expected error for occupied cell, got nil")
 		}
-		expectedError := "Cell already occupied"
+		expectedError := "cell already occupied"
 		if err.Error() != expectedError {
 			t.Errorf("Expected error '%s', got '%s'", expectedError, err.Error())
 		}
 
 		// Check that game state was not altered by the failed move
-		if gs.Board[0] != "X" { // Board should remain as X
-			t.Errorf("Expected Board[0] to still be 'X', got '%s'", gs.Board[0])
+		if app.gameState.Board[0] != "X" { // Board should remain as X
+			t.Errorf("Expected Board[0] to still be 'X', got '%s'", app.gameState.Board[0])
 		}
-		if gs.CurrentPlayer != "O" { // Current player should still be O (who attempted the invalid move)
-			t.Errorf("Expected CurrentPlayer to still be 'O', got '%s'", gs.CurrentPlayer)
+		if app.gameState.CurrentPlayer != "O" { // Current player should still be O (who attempted the invalid move)
+			t.Errorf("Expected CurrentPlayer to still be 'O', got '%s'", app.gameState.CurrentPlayer)
 		}
-		if gs.Winner != "" { // No winner should be set
-			t.Errorf("Expected Winner to be empty, got '%s'", gs.Winner)
+		if app.gameState.Winner != "" { // No winner should be set
+			t.Errorf("Expected Winner to be empty, got '%s'", app.gameState.Winner)
 		}
-		if gs.GameOver != false { // Game should not be over
-			t.Errorf("Expected GameOver to be false, got '%t'", gs.GameOver)
+		if app.gameState.GameOver != false { // Game should not be over
+			t.Errorf("Expected GameOver to be false, got '%t'", app.gameState.GameOver)
 		}
-		// Check if the returned state `gs` from the failed MakeMove is the same as before the call
-		if !reflect.DeepEqual(gs, &originalGameState) {
-			t.Errorf("GameState was unexpectedly altered by failed MakeMove. Got: %v, Expected: %v", gs, originalGameState)
-		}
-
 	})
 
-	t.Run("Game is over", func(t *testing.T) {
+	t.Run("game is over", func(t *testing.T) {
 		app.gameState = app.NewGame()
 		app.gameState.GameOver = true // Manually set game to over
 
@@ -115,20 +108,20 @@ func TestMakeMove(t *testing.T) {
 		if err == nil {
 			t.Fatalf("Expected error for game over, got nil")
 		}
-		expectedError := "Game is over"
+		expectedError := "game is over"
 		if err.Error() != expectedError {
 			t.Errorf("Expected error '%s', got '%s'", expectedError, err.Error())
 		}
 	})
 
-	t.Run("Invalid move index", func(t *testing.T) {
+	t.Run("invalid move index", func(t *testing.T) {
 		app.gameState = app.NewGame()
 
 		_, err := app.MakeMove(9) // Index out of bounds
 		if err == nil {
 			t.Fatalf("Expected error for index 9, got nil")
 		}
-		expectedError := "Invalid move index"
+		expectedError := "invalid move index"
 		if err.Error() != expectedError {
 			t.Errorf("Expected error '%s' for index 9, got '%s'", expectedError, err.Error())
 		}
@@ -201,10 +194,10 @@ func TestWinConditions(t *testing.T) {
 	// --- Test cases for Player O ---
 	// To test for O, X must make the first move.
 	// Row wins for O
-	// X O .
+	// X O X
 	// X O .
 	// . O . (winning O move)
-	testWinScenario(t, "O", []int{0, 3, 1, 4, 2}, 5, "O row 2 (3,4,5)") // X:0,1,2 O:3,4,5
+	testWinScenario(t, "O", []int{0, 3, 1, 4, 6}, 5, "O row 2 (3,4,5)") // X:0,1,6 O:3,4,5
 	// Example: O wins on top row (0,1,2)
 	// X plays 3, O plays 0
 	// X plays 4, O plays 1

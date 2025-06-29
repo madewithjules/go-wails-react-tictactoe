@@ -1,12 +1,9 @@
 html {
-  background-color: rgba(27, 38, 54, 1);
-  text-align: center;
-  color: white;
+  text-align: center; /* Retained for basic alignment if needed outside #App */
 }
 
 body {
   margin: 0;
-  color: white;
   font-family:
     'Nunito',
     -apple-system,
@@ -20,6 +17,7 @@ body {
     'Droid Sans',
     'Helvetica Neue',
     sans-serif;
+  /* Default background and color removed to be handled by App.css themes */
 }
 
 @font-face {
@@ -31,7 +29,7 @@ body {
     url('assets/fonts/nunito-v16-latin-regular.woff2') format('woff2');
 }
 
+/* Minimal styling for #app, specific styling will be in App.css */
 #app {
   height: 100vh;
-  text-align: center;
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import { NewGame, MakeMove, ResetGame } from '../../wailsjs/go/main/App';
+import { NewGame, MakeMove, ResetGame } from '../wailsjs/go/main/App';
 
 function App() {
   const [board, setBoard] = useState(Array(9).fill(""));

@@ -8,7 +8,9 @@
   text-align: center;
   background-color: #f0f0f0; /* Light theme background */
   color: #333; /* Light theme text color */
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
   padding: 20px; /* Add some padding for smaller windows */
   box-sizing: border-box; /* Include padding in width/height calculation */
 }
@@ -23,7 +25,9 @@
   padding: 30px; /* Increased padding */
   border-radius: 12px; /* Softer edges */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 #App.dark-theme .game-container {
@@ -46,7 +50,7 @@ h1 {
 .board {
   display: grid;
   grid-template-columns: repeat(3, 100px); /* Cell size */
-  grid-template-rows: repeat(3, 100px);    /* Cell size */
+  grid-template-rows: repeat(3, 100px); /* Cell size */
   gap: 10px; /* Increased gap for better separation */
   margin-bottom: 25px; /* Increased space below board */
   justify-content: center; /* Center board if container is wider */
@@ -64,7 +68,9 @@ h1 {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
 }
 
 .cell:not(:disabled):hover {
@@ -110,7 +116,6 @@ h1 {
   color: #7f8c8d; /* Muted color for disabled X/O in dark theme */
 }
 
-
 /* Status Message Styling */
 .status-message {
   margin-bottom: 25px; /* Increased space */
@@ -120,13 +125,24 @@ h1 {
 }
 
 /* Specific status colors (requires JS to add classes like .status-win, .status-draw) */
-.status-win { color: #2ecc71; } /* Green for win */
-.status-draw { color: #f39c12; } /* Orange for draw */
-.status-error { color: #e74c3c; } /* Red for error */
-#App.dark-theme .status-win { color: #2eld72; }
-#App.dark-theme .status-draw { color: #f4a123; }
-#App.dark-theme .status-error { color: #ff7979; }
-
+.status-win {
+  color: #2ecc71;
+} /* Green for win */
+.status-draw {
+  color: #f39c12;
+} /* Orange for draw */
+.status-error {
+  color: #e74c3c;
+} /* Red for error */
+#App.dark-theme .status-win {
+  color: #2eld72;
+}
+#App.dark-theme .status-draw {
+  color: #f4a123;
+}
+#App.dark-theme .status-error {
+  color: #ff7979;
+}
 
 /* Controls and Buttons Styling */
 .controls {
@@ -144,19 +160,22 @@ h1 {
   color: #ffffff;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .btn:hover {
   background-color: #2980b9; /* Darker shade on hover */
   transform: translateY(-2px); /* Slight lift on hover */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .btn:active {
   transform: translateY(0px); /* Button press effect */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Theme toggle button distinct styling */
@@ -167,22 +186,21 @@ h1 {
   background-color: #6c7a7d;
 }
 
-
 #App.dark-theme .btn {
   background-color: #5dade2; /* Primary button color for dark theme */
   color: #1c2833; /* Dark text on light blue button for contrast */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #App.dark-theme .btn:hover {
-  background-color: #4caeDe;
+  background-color: #4caede;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
 #App.dark-theme .btn:active {
   transform: translateY(0px);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #App.dark-theme .btn.theme-toggle {
@@ -194,14 +212,22 @@ h1 {
 }
 
 /* Make cells with X or O content apply their specific colors */
-.cell[data-value="X"] { color: #e74c3c; }
-.cell[data-value="O"] { color: #3498db; }
+.cell[data-value='X'] {
+  color: #e74c3c;
+}
+.cell[data-value='O'] {
+  color: #3498db;
+}
 
-#App.dark-theme .cell[data-value="X"] { color: #ff7979; }
-#App.dark-theme .cell[data-value="O"] { color: #5dade2; }
+#App.dark-theme .cell[data-value='X'] {
+  color: #ff7979;
+}
+#App.dark-theme .cell[data-value='O'] {
+  color: #5dade2;
+}
 
 /* Ensure disabled cells with X or O also get muted colors in dark theme */
-#App.dark-theme .cell:disabled[data-value="X"],
-#App.dark-theme .cell:disabled[data-value="O"] {
+#App.dark-theme .cell:disabled[data-value='X'],
+#App.dark-theme .cell:disabled[data-value='O'] {
   color: #7f8c8d;
 }

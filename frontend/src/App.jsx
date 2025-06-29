@@ -1,28 +1,30 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 import './App.css';
-import { NewGame, MakeMove, ResetGame } from '../wailsjs/go/main/App';
+import {NewGame, MakeMove, ResetGame} from '../wailsjs/go/main/App';
 
 function App() {
-  const [board, setBoard] = useState(Array(9).fill(""));
+  const [board, setBoard] = useState(Array(9).fill(''));
   const [currentPlayer, setCurrentPlayer] = useState('X');
   const [statusMessage, setStatusMessage] = useState("Player X's turn");
   const [theme, setTheme] = useState('light');
   const [isGameOver, setIsGameOver] = useState(false);
 
   useEffect(() => {
-    NewGame().then(initialState => {
-      setBoard(initialState.board); // Ensure field names match Go struct (Board vs board)
-      setCurrentPlayer(initialState.currentPlayer);
-      setStatusMessage(`Player ${initialState.currentPlayer}'s turn`);
-      setIsGameOver(initialState.gameOver);
-    }).catch(err => {
-      console.error("Error fetching initial game state:", err);
-      setStatusMessage("Error loading game. Please try refreshing.");
-    });
+    NewGame()
+      .then(initialState => {
+        setBoard(initialState.board); // Ensure field names match Go struct (Board vs board)
+        setCurrentPlayer(initialState.currentPlayer);
+        setStatusMessage(`Player ${initialState.currentPlayer}'s turn`);
+        setIsGameOver(initialState.gameOver);
+      })
+      .catch(err => {
+        console.error('Error fetching initial game state:', err);
+        setStatusMessage('Error loading game. Please try refreshing.');
+      });
   }, []);
 
-  const handleCellClick = (index) => {
-    if (isGameOver || board[index] !== "") {
+  const handleCellClick = index => {
+    if (isGameOver || board[index] !== '') {
       return;
     }
 
@@ -33,7 +35,7 @@ function App() {
         setIsGameOver(updatedState.gameOver);
 
         if (updatedState.winner) {
-          if (updatedState.winner === "draw") {
+          if (updatedState.winner === 'draw') {
             setStatusMessage("It's a draw!");
           } else {
             setStatusMessage(`Player ${updatedState.winner} wins!`);
@@ -59,7 +61,7 @@ function App() {
             key={index}
             className="cell"
             onClick={() => handleCellClick(index)}
-            disabled={isGameOver || cell !== ""}
+            disabled={isGameOver || cell !== ''}
           >
             {cell}
           </button>
@@ -69,19 +71,21 @@ function App() {
   };
 
   const handleResetClick = () => {
-    ResetGame().then(newState => {
-      setBoard(newState.board);
-      setCurrentPlayer(newState.currentPlayer);
-      setStatusMessage(`Player ${newState.currentPlayer}'s turn`);
-      setIsGameOver(newState.gameOver);
-    }).catch(err => {
-      console.error("Error resetting game:", err);
-      setStatusMessage("Error resetting game. Please try again.");
-    });
+    ResetGame()
+      .then(newState => {
+        setBoard(newState.board);
+        setCurrentPlayer(newState.currentPlayer);
+        setStatusMessage(`Player ${newState.currentPlayer}'s turn`);
+        setIsGameOver(newState.gameOver);
+      })
+      .catch(err => {
+        console.error('Error resetting game:', err);
+        setStatusMessage('Error resetting game. Please try again.');
+      });
   };
 
   const toggleTheme = () => {
-    setTheme(currentTheme => currentTheme === 'light' ? 'dark' : 'light');
+    setTheme(currentTheme => (currentTheme === 'light' ? 'dark' : 'light'));
   };
 
   return (

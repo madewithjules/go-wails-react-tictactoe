@@ -170,7 +170,6 @@ func TestWinConditions(t *testing.T) {
 			// For simplicity, let's ensure CurrentPlayer is set correctly before the winning move.
 			app.gameState.CurrentPlayer = player
 
-
 			gs, err := app.MakeMove(winningMove)
 			if err != nil {
 				t.Fatalf("Winning MakeMove(%d) for %s failed: %v", winningMove, player, err)
@@ -210,13 +209,13 @@ func TestWinConditions(t *testing.T) {
 	// X plays 3, O plays 0
 	// X plays 4, O plays 1
 	// X plays 6 (arbitrary other cell), O plays 2 (winning)
-	testWinScenario(t, "O", []int{3,0, 4,1, 6}, 2, "O row 1 (0,1,2)")
+	testWinScenario(t, "O", []int{3, 0, 4, 1, 6}, 2, "O row 1 (0,1,2)")
 
 	// Column wins for O
 	// X O .
 	// X O .
 	// . O . (winning O move for col 2: 1,4,7)
-	testWinScenario(t, "O", []int{0,1, 2,4, 3}, 7, "O col 2 (1,4,7)") // X:0,2,3 O:1,4,7
+	testWinScenario(t, "O", []int{0, 1, 2, 4, 3}, 7, "O col 2 (1,4,7)") // X:0,2,3 O:1,4,7
 
 	// Diagonal wins for O
 	// X . O
@@ -225,12 +224,12 @@ func TestWinConditions(t *testing.T) {
 	// O . X
 	// . O X
 	// X . O (winning O move for diag 1: 0,4,8)
-	testWinScenario(t, "O", []int{2,0, 1,4, 5}, 8, "O diag 1 (0,4,8)") // X:2,1,5 O:0,4,8
+	testWinScenario(t, "O", []int{2, 0, 1, 4, 5}, 8, "O diag 1 (0,4,8)") // X:2,1,5 O:0,4,8
 	// Example: O wins on diag 2 (2,4,6)
 	// X plays 0, O plays 2
 	// X plays 1, O plays 4
 	// X plays 3 (arbitrary), O plays 6 (winning)
-	testWinScenario(t, "O", []int{0,2, 1,4, 3}, 6, "O diag 2 (2,4,6)")
+	testWinScenario(t, "O", []int{0, 2, 1, 4, 3}, 6, "O diag 2 (2,4,6)")
 }
 
 func TestDrawCondition(t *testing.T) {
@@ -284,7 +283,6 @@ func TestDrawCondition(t *testing.T) {
 		t.Errorf("Expected board to be full for a draw, got %v", gs.Board)
 	}
 }
-
 
 func TestResetGame(t *testing.T) {
 	app := NewApp()
